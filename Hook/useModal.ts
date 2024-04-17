@@ -8,13 +8,13 @@ const useModal = () => {
   const openModal = (config: ConfigModal) => {
     open({
       ...config,
-      open: true,
+      open: true
     })
   }
 
   return {
     openModal,
-    closeModal,
+    closeModal
   }
 }
 

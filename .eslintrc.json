@@ -53,7 +53,8 @@
             "parser": "flow",
             "usePrettierrc": false,
             "endOfLine": "auto",
-            "jsx-a11y/click-events-have-key-events":"off"
+            "jsx-a11y/click-events-have-key-events":"off",
+            "@typescript-eslint/no-var-requires": "off"
           }
         ],
         // "@typescript-eslint/explicit-function-return-type":0,

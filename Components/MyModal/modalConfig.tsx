@@ -1,18 +1,29 @@
 import React from 'react'
-import Modal from '@mui/material/Modal'
 import { ModalProps } from './type'
-import Box from '@mui/material/Box'
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
+
 const ModalConfig = ({ config, closeModal }: ModalProps) => {
   return (
-    <Modal  open={config.open || false} onClose={closeModal} style={{ width: 500 }}>
-      <Box>
-        {config.showHeader && (
-          <div className={`w-full ${config.classHeader}`}>Header</div>
+    <Modal
+      hideCloseButton={config?.overClickClose || false}
+      isKeyboardDismissDisabled={!config?.overClickClose}
+      isDismissable={!config?.overClickClose}
+      isOpen={config?.open || false}
+      placement={config?.positionModal || 'auto'}
+      onClose={closeModal}>
+      <ModalContent className={config?.classContainer}>
+        {() => (
+          <>
+            {config?.title && (
+              <ModalHeader className={`flex flex-col gap-1 ${config?.classHeader}`}>
+                {config?.title}
+              </ModalHeader>
+            )}
+
+            <ModalBody className={config?.classContent}>{config?.content}</ModalBody>
+          </>
         )}
-        {config.content && (
-          <div className={`w-[500px]  ${config.classContent}`}>{config.content}</div>
-        )}
-      </Box>
+      </ModalContent>
     </Modal>
   )
 }

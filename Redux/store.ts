@@ -18,13 +18,13 @@ export const makeStore = () => {
     key: 'nextjs',
     storage,
     whitelist: WHITE_LIST_PERSIT_REDUX,
-    stateReconciler: autoMergeLevel2,
+    stateReconciler: autoMergeLevel2
   }
   const persistedReducer = persistReducer(persistConfig, reducer)
   const storeRedux = configureStore({
     reducer: {
-      app: persistedReducer,
-    },
+      app: persistedReducer
+    }
   })
   if (isClient) {
     // const intlReducerData = getPersistDataByKey(SLICES.local)

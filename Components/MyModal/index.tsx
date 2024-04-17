@@ -5,15 +5,15 @@ import { ConfigModal, ContainerContextProps } from './type'
 
 const defaultValue: ContainerContextProps = {
   config: {
-    content: <></>,
+    content: <></>
   },
   closeModal: () => {},
-  openModal: () => {},
+  openModal: () => {}
 }
 
 const defaultConfig: ConfigModal = {
   content: <></>,
-  showHeader: true,
+  showHeader: true
 }
 export const ModalContext = createContext<ContainerContextProps>(defaultValue)
 
