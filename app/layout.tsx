@@ -6,6 +6,7 @@ import StyledComponentsRegistry from '@/Components/RegistryApp'
 import ReduxProvider from '@/Components/ReduxProvider'
 import MyModalProvider from '@/Components/MyModal'
 import NextUIProvider from '@/Components/NextUIProvider'
+import QueryProvider from '@/Components/QueryProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -17,13 +18,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <NextUIProvider>
-            <ReduxProvider>
-              <MyModalProvider>{children}</MyModalProvider>
-            </ReduxProvider>
-          </NextUIProvider>
-        </StyledComponentsRegistry>
+        <QueryProvider>
+          <StyledComponentsRegistry>
+            <NextUIProvider>
+              <ReduxProvider>
+                <MyModalProvider>{children}</MyModalProvider>
+              </ReduxProvider>
+            </NextUIProvider>
+          </StyledComponentsRegistry>
+        </QueryProvider>
       </body>
     </html>
   )
