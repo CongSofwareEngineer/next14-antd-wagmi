@@ -16,7 +16,7 @@ const nextConfig = {
     // optimizeServerReact: true,
     // serverMinification: true
   },
-  optimizeFonts: true,
+  // optimizeFonts: true,
   swcMinify: true,
   compiler: {
     styledComponents: {
