@@ -24,7 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <NextUIProvider>
               <ReduxProvider>
                 <MyModalProvider>
-                  <ClientREnder>{children}</ClientREnder>
+                  {/* <ClientREnder>{children}</ClientREnder> */}
+                  {children}
                 </MyModalProvider>
               </ReduxProvider>
             </NextUIProvider>

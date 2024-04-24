@@ -5,3 +5,9 @@ export enum SLICE {
 }
 
 export const WHITE_LIST_PERSIT_REDUX = [SLICE.Language]
+
+export const INIT_STATE = {
+  [SLICE.Language]: '',
+  [SLICE.Setting]: Object,
+  [SLICE.UserData]: Object
+} as const
