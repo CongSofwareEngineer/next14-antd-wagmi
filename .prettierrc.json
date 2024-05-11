@@ -7,5 +7,6 @@
   "useTabs": false,
    "bracketSpacing": true,
   "jsxBracketSameLine": true,
-  "@typescript-eslint/no-var-requires":false
+  "@typescript-eslint/no-var-requires":false,
+  "endOfLine": "auto"
 }

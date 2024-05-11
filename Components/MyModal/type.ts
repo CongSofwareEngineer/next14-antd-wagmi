@@ -17,7 +17,8 @@ export type ConfigModal = {
   title?: React.ReactNode | string | undefined,
   overClickClose?: boolean | true,
   showBtnClose?: boolean | true,
-  positionModal?: Placement
+  positionModal?: Placement,
+  afterClose?: () => Promise<void> | void
 }
 
 export type ModalProps = {

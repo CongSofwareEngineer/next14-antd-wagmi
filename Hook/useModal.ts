@@ -8,6 +8,7 @@ const useModal = () => {
   const openModal = (config: ConfigModal) => {
     open({
       ...config,
+      showBtnClose: config.showBtnClose === false ? false : config.overClickClose,
       open: true
     })
   }

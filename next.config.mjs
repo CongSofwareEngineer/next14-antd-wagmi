@@ -3,20 +3,28 @@
 // import envJson from './env.json'
 
 // const env = require('./env.json')
+import path from 'path'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
+const __dirname = path.dirname(__filename) // get the name of the directory
+
 const nextConfig = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')]
+  },
   experimental: {
     // optimisticClientCache: true,
     // workerThreads: true,
     // optimizeCss: true,
     // gzipSize: true,
-    // optimizePackageImports: [
-    //   '@nextui-org/react',
-    //   '@tanstack/react-query',
-    //   'framer-motion',
-    //   'styled-components',
-    //   'tailwind-merge',
-    //   '@emotion/reac'
-    // ],
+    optimizePackageImports: [
+      '@nextui-org/react',
+      '@tanstack/react-query',
+      'framer-motion',
+      'styled-components',
+      'tailwind-merge',
+      '@emotion/reac'
+    ]
     // optimizeServerReact: true,
     // serverMinification: true
   },

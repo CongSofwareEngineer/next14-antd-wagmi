@@ -6,6 +6,8 @@ import { persistStore, persistReducer } from 'redux-persist'
 
 import appReducer from './appReducer'
 import { IntlAction } from 'react-intl-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const reducer = (state: Partial<unknown> | unknown, action: IntlAction) => {
   return appReducer(state || {}, action)
@@ -39,5 +41,11 @@ export const makeStore = () => {
 const persistor = persistStore(makeStore())
 const storeRedux = makeStore()
 
-export { persistor }
+export type RootState = ReturnType<typeof storeRedux.getState>
+export type AppDispatch = typeof storeRedux.dispatch
+
+const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+const useAppSelector = useSelector.withTypes<RootState>()
+
+export { persistor, useAppDispatch, useAppSelector }
 export default storeRedux

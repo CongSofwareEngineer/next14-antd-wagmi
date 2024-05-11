@@ -1,13 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '@/Styles/globals.css'
+import '@/Styles/globals.scss'
+import '@/Styles/override.scss'
 import React from 'react'
 import StyledComponentsRegistry from '@/Components/RegistryApp'
 import ReduxProvider from '@/Components/ReduxProvider'
 import MyModalProvider from '@/Components/MyModal'
-import NextUIProvider from '@/Components/NextUIProvider'
 import Web3Provider from '@/Components/Web3Provider'
 // import ClientREnder from '@/Components/ClientRender'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
+import AntdProvider from '@/Components/AntdProvider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,14 +24,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <Web3Provider>
           <StyledComponentsRegistry>
-            <NextUIProvider>
-              <ReduxProvider>
-                <MyModalProvider>
-                  {/* <ClientREnder>{children}</ClientREnder> */}
-                  {children}
-                </MyModalProvider>
-              </ReduxProvider>
-            </NextUIProvider>
+            <AntdRegistry>
+              <AntdProvider>
+                <ReduxProvider>
+                  <MyModalProvider>{children}</MyModalProvider>
+                </ReduxProvider>
+              </AntdProvider>
+            </AntdRegistry>
           </StyledComponentsRegistry>
         </Web3Provider>
       </body>

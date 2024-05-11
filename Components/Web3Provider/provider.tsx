@@ -1,15 +1,17 @@
 'use client'
-// import { CONFIG_DEFAULT, ProjectId } from '@/Constant/web3Modal'
+import { CONFIG_DEFAULT, ProjectId } from '@/Constant/web3Modal'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-// import { State, WagmiProvider } from 'wagmi'
+import { State, WagmiProvider } from 'wagmi'
 // import { State } from 'wagmi'
-// import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { bsc } from 'viem/chains'
 
 const ProviderWeb3Server = ({
-  children // initialState
+  children,
+  initialState
 }: {
-  children: React.ReactNode
-  // initialState?: State
+  children: React.ReactNode,
+  initialState?: State
 }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -19,19 +21,20 @@ const ProviderWeb3Server = ({
     }
   })
 
-  // if (!ProjectId) throw new Error('Project ID is not defined')
+  if (!ProjectId) throw new Error('Project ID is not defined')
 
-  // createWeb3Modal({
-  //   wagmiConfig: CONFIG_DEFAULT,
-  //   projectId: ProjectId,
-  //   enableAnalytics: true, // Optional - defaults to your Cloud configuration
-  //   enableOnramp: true // Optional - false as default
-  // })
+  createWeb3Modal({
+    wagmiConfig: CONFIG_DEFAULT,
+    projectId: ProjectId,
+    enableAnalytics: true, // Optional - defaults to your Cloud configuration
+    enableOnramp: true, // Optional - false as default
+    defaultChain: bsc
+  })
 
   return (
-    // <WagmiProvider config={CONFIG_DEFAULT} initialState={initialState}>
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    // </WagmiProvider>
+    <WagmiProvider config={CONFIG_DEFAULT} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiProvider>
   )
 }
 
