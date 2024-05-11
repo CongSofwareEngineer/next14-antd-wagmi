@@ -2,12 +2,12 @@
 import React from 'react'
 import { Button, Select, SelectItem } from '@nextui-org/react'
 import useModal from '@/Hook/useModal'
-import { useConnect } from 'wagmi'
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { injected, walletConnect } from 'wagmi/connectors'
-import { ProjectId } from '@/Constant/web3Modal'
+// import { useConnect } from 'wagmi'
+// import { useWeb3Modal } from '@web3modal/wagmi/react'
+// import { injected, walletConnect } from 'wagmi/connectors'
+// import { ProjectId } from '@/Constant/web3Modal'
 
-export const animals = [
+const animals = [
   {
     label: 'Cat',
     value: 'cat',
@@ -58,21 +58,21 @@ export const animals = [
 
 const PageScreen = () => {
   const { openModal } = useModal()
-  const { connect, connectors } = useConnect()
-  const { open, close } = useWeb3Modal()
+  // const { connect, connectors } = useConnect()
+  // const { open, close } = useWeb3Modal()
 
   const handleConnect = () => {
     console.log('handleConnect')
 
-    connect({
-      connector: walletConnect({
-        projectId: ProjectId
-        // metadata:{
+    // connect({
+    //   connector: walletConnect({
+    //     projectId: ProjectId
+    //     // metadata:{
 
-        // }
-      })
-      // chainId: 137
-    })
+    //     // }
+    //   })
+    //   // chainId: 137
+    // })
     // console.log('====================================')
     // console.log('handleConnect')
     // console.log('====================================')

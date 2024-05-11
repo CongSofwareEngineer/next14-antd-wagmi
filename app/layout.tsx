@@ -7,7 +7,7 @@ import ReduxProvider from '@/Components/ReduxProvider'
 import MyModalProvider from '@/Components/MyModal'
 import NextUIProvider from '@/Components/NextUIProvider'
 import Web3Provider from '@/Components/Web3Provider'
-import ClientREnder from '@/Components/ClientRender'
+// import ClientREnder from '@/Components/ClientRender'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
