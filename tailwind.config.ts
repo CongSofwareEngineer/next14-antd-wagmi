@@ -4,10 +4,9 @@ import plugin from 'tailwindcss/plugin'
 const config = {
   content: [
     './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
+    './Components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
+    './src/**/*.{ts,tsx}'
   ],
   prefix: '',
   theme: {},
@@ -21,7 +20,9 @@ const config = {
           fontWeight: '700'
         },
         '.text-medium': {},
-        '.text-common': {}
+        '.text-common': {},
+        '.desktop': {},
+        '.mobile': {}
       }
 
       addUtilities(newUtilities)
