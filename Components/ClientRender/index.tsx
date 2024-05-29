@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 const FirstLoading = dynamic(() => import('../FirstLoading'))
-const Header = dynamic(() => import('../Header'))
+const Header = dynamic(() => import('../Header'), { ssr: true })
 
 // import React, { useLayoutEffect, useState } from 'react'
 
