@@ -37,5 +37,7 @@ export const CONFIG_DEFAULT = defaultWagmiConfig({
   ssr: true,
   storage: createStorage({
     storage: cookieStorage
-  })
+  }),
+  enableEmail: true,
+  enableWalletConnect: true
 })

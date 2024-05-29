@@ -6,7 +6,7 @@ import MySelect from '@/Components/MySelect'
 import SecondButton from '@/Components/SecondButton'
 import PrimaryButton from '@/Components/PrimaryButton'
 import { useConnect, useGasPrice } from 'wagmi'
-// import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 import { injected, walletConnect } from 'wagmi/connectors'
 import { ProjectId } from '@/Constant/web3Modal'
 
@@ -64,6 +64,7 @@ const PageScreen = () => {
   const { connect, error, isPending, status, isSuccess } = useConnect()
   const { data } = useGasPrice({ chainId: 56 })
   // const { open, close } = useWeb3Modal()
+  const { open } = useWeb3Modal()
   console.log('====================================')
 
   console.log({ error, isPending, status, isSuccess })
@@ -135,6 +136,10 @@ const PageScreen = () => {
 
       <SecondButton onClick={handleWalletConnect} size="large">
         wallet Connect
+      </SecondButton>
+
+      <SecondButton onClick={() => open()} size="large">
+        open Connect
       </SecondButton>
 
       <SecondButton onClick={handleConnectMetamask} size="large">

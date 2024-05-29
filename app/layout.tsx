@@ -10,6 +10,7 @@ import Web3Provider from '@/Components/Web3Provider'
 // import ClientREnder from '@/Components/ClientRender'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import AntdProvider from '@/Components/AntdProvider'
+import ClientRender from '@/Components/ClientRender'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AntdRegistry>
               <AntdProvider>
                 <ReduxProvider>
-                  <MyModalProvider>{children}</MyModalProvider>
+                  <MyModalProvider>
+                    <ClientRender>{children}</ClientRender>
+                  </MyModalProvider>
                 </ReduxProvider>
               </AntdProvider>
             </AntdRegistry>
