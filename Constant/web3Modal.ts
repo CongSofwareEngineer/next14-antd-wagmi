@@ -14,10 +14,12 @@ import {
 export const ProjectId: string = process.env.NEXT_PUBLIC_PROJECT_ID || ''
 
 export const Metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com', // origin must match your domain & subdomain
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+  name: 'tc-store',
+  description: 'tc-store',
+  icons: [
+    'https://tcstore.vercel.app/_next/image?url=%2Flogo_tc_store.png&w=1920&q=75'
+  ],
+  url: 'https://tcstore.vercel.app/'
 }
 
 export const CHAIN_SUPPORT = [
@@ -39,5 +41,6 @@ export const CONFIG_DEFAULT = defaultWagmiConfig({
     storage: cookieStorage
   }),
   enableEmail: true,
-  enableWalletConnect: true
+  enableWalletConnect: true,
+  enableCoinbase: false
 })

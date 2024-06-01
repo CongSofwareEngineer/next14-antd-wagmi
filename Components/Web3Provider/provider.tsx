@@ -28,7 +28,19 @@ const ProviderWeb3Server = ({
     projectId: ProjectId,
     enableAnalytics: true, // Optional - defaults to your Cloud configuration
     enableOnramp: true, // Optional - false as default
-    defaultChain: bsc
+    defaultChain: bsc,
+    allWallets: 'HIDE',
+    featuredWalletIds: [
+      '47bb07617af518642f3413a201ec5859faa63acb1dd175ca95085d35d38afb83'
+    ],
+    metadata: {
+      name: 'tc-store',
+      description: 'tc-store',
+      icons: [
+        'https://tcstore.vercel.app/_next/image?url=%2Flogo_tc_store.png&w=1920&q=75'
+      ],
+      url: 'https://tcstore.vercel.app/'
+    }
   })
 
   return (

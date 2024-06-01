@@ -17,7 +17,7 @@ const ClientREnder = ({ children }: Readonly<{ children: React.ReactNode }>) => 
   return (
     <>
       <Header />
-      <section className="min-h-[calc(100vh-56px)] md:px-12 px-5 ">
+      <section className="min-h-[calc(100vh-56px)] md:px-12 px-5 w-full ">
         {children}
       </section>
       <FirstLoading />

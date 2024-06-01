@@ -1,14 +1,10 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 // import { Button, Select, SelectItem } from '@nextui-org/react'
-import useModal from '@/Hook/useModal'
 import MySelect from '@/Components/MySelect'
-import SecondButton from '@/Components/SecondButton'
+import useWalletConnectV1 from '@/Hook/useWalletConnectV1'
 import PrimaryButton from '@/Components/PrimaryButton'
-import { useConnect, useGasPrice } from 'wagmi'
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { injected, walletConnect } from 'wagmi/connectors'
-import { ProjectId } from '@/Constant/web3Modal'
+import { useAppSelector } from '@/Redux/store'
 
 const animals = [
   {
@@ -60,65 +56,8 @@ const animals = [
 ]
 
 const PageScreen = () => {
-  const { openModal } = useModal()
-  const { connect, error, isPending, status, isSuccess } = useConnect()
-  const { data } = useGasPrice({ chainId: 56 })
-  // const { open, close } = useWeb3Modal()
-  const { open } = useWeb3Modal()
-  console.log('====================================')
-
-  console.log({ error, isPending, status, isSuccess })
-  console.log('====================================')
-  if (data) {
-    const bigIntValue = BigInt(data)
-    console.log({ bigIntValue: bigIntValue.toString() })
-  }
-  useEffect(() => {
-    console.log({ data })
-    if (data) {
-      console.log({ bigIntValue: data.toString() })
-    }
-  }, [data])
-
-  const handleConnectMetamask = () => {
-    connect({
-      connector: injected(),
-      chainId: 56
-    })
-    // connectAsync({
-    //   connector: injected(),
-    //   chainId: 56
-    // })
-  }
-
-  const handleWalletConnect = () => {
-    console.log('handleConnect')
-
-    connect({
-      connector: walletConnect({
-        projectId: ProjectId,
-        metadata: {
-          name: 'DienCong',
-          description: 'diencong',
-          url: 'tc-sctore.com',
-          icons: ['']
-        }
-      }),
-      chainId: 56
-    })
-    // console.log('====================================')
-    // console.log('handleConnect')
-    // console.log('====================================')
-    // open()
-  }
-
-  const onClick = () => {
-    openModal({
-      content: <div>hello</div>,
-      title: 'Open Modal hello'
-    })
-  }
-
+  const {connect}=useWalletConnectV1()
+  const {ConnectedChain}=useAppSelector(state=>state.app)
   const onChangeSelect = (value: any) => {
     console.log('====================================')
     console.log({ value })
@@ -126,32 +65,17 @@ const PageScreen = () => {
   }
 
   return (
-    <>
-      <PrimaryButton onClick={onClick} size="middle">
-        Open Modal
+    <div className="w-full h-f flex flex-col gap-10 justify-center items-center">
+      <PrimaryButton onClick={()=>connect()}>
+      connect
       </PrimaryButton>
-      <SecondButton onClick={onClick} size="large">
-        Open Modal
-      </SecondButton>
-
-      <SecondButton onClick={handleWalletConnect} size="large">
-        wallet Connect
-      </SecondButton>
-
-      <SecondButton onClick={() => open()} size="large">
-        open Connect
-      </SecondButton>
-
-      <SecondButton onClick={handleConnectMetamask} size="large">
-        metamask Connect
-      </SecondButton>
       <MySelect
         defaultValue={animals[0]}
-        onChange={(value: string) => onChangeSelect(value)}
+        onChange={(value: string) => onChangeSelect(ConnectedChain)}
         option={animals}
         className="w-[300px]"
       />
-    </>
+    </div>
   )
 }
 

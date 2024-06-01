@@ -1,4 +1,4 @@
-import { WHITE_LIST_PERSIT_REDUX } from '@/Constant/redux'
+import { TYPE_SLICE, TypeStore, WHITE_LIST_PERSIT_REDUX } from '@/Constant/redux'
 import { configureStore } from '@reduxjs/toolkit'
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
 import storage from 'redux-persist/lib/storage'
@@ -23,7 +23,7 @@ export const makeStore = () => {
     stateReconciler: autoMergeLevel2
   }
   const persistedReducer = persistReducer(persistConfig, reducer)
-  const storeRedux = configureStore({
+  const storeRedux = configureStore<TypeStore>({
     reducer: {
       app: persistedReducer
     }

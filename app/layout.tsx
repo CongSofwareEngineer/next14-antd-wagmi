@@ -11,6 +11,7 @@ import Web3Provider from '@/Components/Web3Provider'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import AntdProvider from '@/Components/AntdProvider'
 import ClientRender from '@/Components/ClientRender'
+import WalletConnectV1 from '@/Components/WalletConnectV1'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <AntdProvider>
                 <ReduxProvider>
                   <MyModalProvider>
-                    <ClientRender>{children}</ClientRender>
+                    <WalletConnectV1>
+                      <ClientRender>{children}</ClientRender>
+                    </WalletConnectV1>
                   </MyModalProvider>
                 </ReduxProvider>
               </AntdProvider>

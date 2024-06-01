@@ -1,11 +1,11 @@
-import { INIT_STATE, SLICE } from '@/Constant/redux'
+import { INIT_STATE, SLICE, TYPE_SLICE } from '@/Constant/redux'
 import { createSlice } from '@reduxjs/toolkit'
 
 export const userDataSlice = createSlice({
   name: SLICE.UserData,
   initialState: INIT_STATE[SLICE.UserData],
   reducers: {
-    setUserData: (state, action) => {
+    setUserData: (state: TYPE_SLICE | any, action) => {
       state[SLICE.UserData] = action.payload
     }
   }
