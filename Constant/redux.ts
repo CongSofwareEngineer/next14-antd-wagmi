@@ -1,3 +1,5 @@
+import { PersistPartial } from "redux-persist/es/persistReducer"
+
 export enum SLICE {
   Setting = 'Setting',
   Language = 'Language',
@@ -20,13 +22,12 @@ export type TYPE_SLICE = {
   [SLICE.UserData]: Object
   [SLICE.ConnectedChain]: Number
 }
-
-
-export type TypeStore = {
- app:{
-  [SLICE.Language]: string,
-  [SLICE.Setting]: Object,
-  [SLICE.UserData]: Object,
-  [SLICE.ConnectedChain]: Number 
+ 
+export type TypePersistReducer = {
+  [SLICE.Language]?: string,
+  [SLICE.Setting]?: Object,
+  [SLICE.UserData]?: Object,
+  [SLICE.ConnectedChain]?: Number
  }
-}
+
+ 

@@ -14,7 +14,7 @@ export type TxParams = {
 
 export type WalletConnectV1ContextType = {
   client: WalletConnect | null
-  address: Address | null
+  address: string | null
   connected: boolean
   connect: ( chainId?: any) => Promise<WalletConnect | null>
   disconnect: () => Promise<void>

@@ -56,8 +56,8 @@ const animals = [
 ]
 
 const PageScreen = () => {
-  const {connect}=useWalletConnectV1()
-  const {ConnectedChain}=useAppSelector(state=>state.app)
+  const { connect,disconnect } = useWalletConnectV1()
+  const { ConnectedChain } = useAppSelector((state) => state.app)
   const onChangeSelect = (value: any) => {
     console.log('====================================')
     console.log({ value })
@@ -66,9 +66,8 @@ const PageScreen = () => {
 
   return (
     <div className="w-full h-f flex flex-col gap-10 justify-center items-center">
-      <PrimaryButton onClick={()=>connect()}>
-      connect
-      </PrimaryButton>
+      <PrimaryButton onClick={() => connect()}>connect</PrimaryButton>
+      <PrimaryButton onClick={() => disconnect()}>disconnect</PrimaryButton>
       <MySelect
         defaultValue={animals[0]}
         onChange={(value: string) => onChangeSelect(ConnectedChain)}
