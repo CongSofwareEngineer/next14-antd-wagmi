@@ -28,6 +28,6 @@ export type TypePersistReducer = {
   [SLICE.Setting]?: Object,
   [SLICE.UserData]?: Object,
   [SLICE.ConnectedChain]?: Number
- }
+ }& unknown
 
  
