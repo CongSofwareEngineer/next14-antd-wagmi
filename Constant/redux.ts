@@ -1,5 +1,4 @@
-import { PersistPartial } from "redux-persist/es/persistReducer"
-
+ 
 export enum SLICE {
   Setting = 'Setting',
   Language = 'Language',
