@@ -56,7 +56,7 @@ const animals = [
 ]
 
 const PageScreen = () => {
-  const { connect,disconnect } = useWalletConnectV1()
+  const { connect, disconnect } = useWalletConnectV1()
   const { ConnectedChain } = useAppSelector((state) => state.app)
   const onChangeSelect = (value: any) => {
     console.log('====================================')

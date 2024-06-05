@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { ContractFunctionName } from 'viem'
-import { Config, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
-import { WriteContractVariables } from 'wagmi/query'
+import { Config, useSendTransaction, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
+import { SendTransactionVariables, WriteContractVariables } from 'wagmi/query'
 
 type SendTransactionWeb3ModalType = {
   callBackDone?: () => Promise<void> | void
@@ -11,44 +11,85 @@ type SendTransactionWeb3ModalType = {
   options?: object
 }
 
+type SendTokenNativeWeb3ModalType = {
+  callBackDone?: () => Promise<void> | void
+  callBackBefore?: () => Promise<void> | void
+  callBackReject?: () => Promise<void> | void,
+  variables: SendTransactionVariables<Config, number>,
+  options?: object
+}
+
 const useSendTxWeb3Modal = () => {
-  const { writeContract, data: hash, isError: isErrorHash, error: errorHash } = useWriteContract()
-  const { isPending, isError, isSuccess, error } = useWaitForTransactionReceipt({ hash: hash })
+  const { writeContract, data: hashWriteContract, isError: isErrorHashWriteContract, error: errorHashWriteContract } = useWriteContract()
+  const { isPending: isPendingWriteContract, isError: isErrorWriteContract, isSuccess: isSuccessWriteContract, error: errorWriteContract } = useWaitForTransactionReceipt({ hash: hashWriteContract })
+  //send token native
+  const { sendTransaction, data: hashTokenNative, isError: isErrorHashTokenNative, error: errorHashTokenNative } = useSendTransaction()
+  const { isPending: isPendingTokenNative, isError: isErrorTokenNative, isSuccess: isSuccessTokenNative, error: errorTokenNative } = useWaitForTransactionReceipt({ hash: hashTokenNative })
 
   const callBackDoneRef = useRef<any>(() => { })
   const callBackBeforeRef = useRef<any>(() => { })
   const callBackRejectRef = useRef<any>(() => { })
 
   useEffect(() => {
-    if (hash) {
+    if (hashWriteContract && hashTokenNative) {
       callBackBeforeRef.current()
     }
-  }, [hash])
+  }, [hashWriteContract, hashTokenNative])
 
+  //tracking write contract
   useEffect(() => {
-    if (isErrorHash) {
-      callBackRejectRef.current(errorHash.message)
+    if (isErrorHashWriteContract) {
+      callBackRejectRef.current(errorHashWriteContract.message)
     }
-    if (isError) {
-      callBackRejectRef.current(error.message)
+    if (isErrorWriteContract) {
+      callBackRejectRef.current(errorWriteContract.message)
     }
-    if (isPending) {
+    if (isPendingWriteContract) {
       callBackBeforeRef.current()
     }
-    if (isSuccess) {
+    if (isSuccessWriteContract) {
       callBackDoneRef.current()
     }
 
-  }, [isError, errorHash, isErrorHash, isPending, isSuccess])
+  }, [isErrorWriteContract, errorHashWriteContract, isErrorHashWriteContract, isPendingWriteContract, isSuccessWriteContract])
 
-  const sendTransactionWeb3Modal = useCallback((config: SendTransactionWeb3ModalType) => {
+  //tracking send token native
+  useEffect(() => {
+    if (isErrorHashTokenNative) {
+      callBackRejectRef.current(errorHashTokenNative.message)
+    }
+    if (isErrorTokenNative) {
+      callBackRejectRef.current(errorTokenNative.message)
+    }
+    if (isPendingTokenNative) {
+      callBackBeforeRef.current()
+    }
+    if (isSuccessTokenNative) {
+      callBackDoneRef.current()
+    }
+
+  }, [isErrorTokenNative, errorHashTokenNative, isErrorHashTokenNative, isPendingTokenNative, isSuccessWriteContract])
+
+  const addCallBackOption = useCallback((config: any) => {
     callBackBeforeRef.current = config.callBackBefore
     callBackDoneRef.current = config.callBackDone
     callBackRejectRef.current = config.callBackReject
+  }, [])
+
+
+  const sendTxWeb3Modal = useCallback((config: SendTransactionWeb3ModalType) => {
+    addCallBackOption(config)
     writeContract(config.variables, config.options)
   }, [writeContract])
 
-  return { sendTransactionWeb3Modal }
+  const sendTokenNativeWeb3Modal = useCallback((config: SendTokenNativeWeb3ModalType) => {
+    addCallBackOption(config)
+    sendTransaction(config.variables, config.options)
+  }, [sendTransaction])
+
+
+
+  return { sendTxWeb3Modal, sendTokenNativeWeb3Modal }
 }
 
 export default useSendTxWeb3Modal
