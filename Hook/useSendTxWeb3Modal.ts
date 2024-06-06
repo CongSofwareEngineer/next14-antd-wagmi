@@ -8,7 +8,11 @@ type SendTransactionWeb3ModalType = {
   callBackBefore?: () => Promise<void> | void
   callBackReject?: () => Promise<void> | void,
   variables: WriteContractVariables<[], ContractFunctionName<[], 'nonpayable' | 'payable'>, [], Config, number>,
-  options?: object
+  options?: {
+    onSuccess?: (data: any, variables: any, context: any) => void;
+    onError?: (error: any, variables: any, context: any | undefined) => void;
+    onSettled?: (data: any | undefined, error: any | null, variables: any, context: any | undefined) => void;
+  }
 }
 
 type SendTokenNativeWeb3ModalType = {
@@ -16,7 +20,11 @@ type SendTokenNativeWeb3ModalType = {
   callBackBefore?: () => Promise<void> | void
   callBackReject?: () => Promise<void> | void,
   variables: SendTransactionVariables<Config, number>,
-  options?: object
+  options?:{
+    onSuccess?: (data: any, variables: any, context: any) => void;
+    onError?: (error: any, variables: any, context: any | undefined) => void;
+    onSettled?: (data: any | undefined, error: any | null, variables: any, context: any | undefined) => void;
+  }
 }
 
 const useSendTxWeb3Modal = () => {
@@ -84,7 +92,7 @@ const useSendTxWeb3Modal = () => {
 
   const sendTokenNativeWeb3Modal = useCallback((config: SendTokenNativeWeb3ModalType) => {
     addCallBackOption(config)
-    sendTransaction(config.variables, config.options)
+    sendTransaction(config.variables,config.options)
   }, [sendTransaction])
 
 
