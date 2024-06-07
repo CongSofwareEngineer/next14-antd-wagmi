@@ -19,7 +19,9 @@ const config = {
           fontSize: '40px',
           fontWeight: '700'
         },
-        '.text-medium': {},
+        '.text-medium': {
+          
+        },
         '.text-common': {},
         '.desktop': {},
         '.mobile': {}
